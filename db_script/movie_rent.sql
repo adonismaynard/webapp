@@ -2,11 +2,6 @@
 genre text not null, 
 primary key (gencode));
 
-insert into tblCat (genre) values ('action');
-insert into tblCat (genre) values ('drama');
-insert into tblCat (genre) values ('comedy');
-insert into tblCat (genre) values ('musical');
-
 create table tblCDetail(cdCode serial not null, 
 MovieTitle text not null, 
 gencode serial not null, 
@@ -25,6 +20,7 @@ Purok text not null,
 BrgyName text not null,
 Unique (fname,lname,mname),
 Primary Key (cid));
+
 
 create table tblcustomertransaction(
 services text not null,
@@ -68,8 +64,6 @@ return new;
 else
 insert into tblcdreturned (petsa,cid,cdCode,transactcode) values (now()::date, new.cid,new.cdCode,new.transactcode);
 update tblCDetail set availability=availability+new.borrowedDisc where cdCode=new.cdCode;
-
-
 delete from tblcdonrent where cid=new.cid and cdCode=new.cdCode; 
 return new;
 end if;
@@ -80,3 +74,30 @@ Alter Function UpdateAvailability()owner to postgres;
 create trigger updateAvailability
 after insert on tbltransaction
 for each row execute procedure UpdateAvailability();
+
+insert into tblCat (genre) values ('action');
+insert into tblCat (genre) values ('drama');
+insert into tblCat (genre) values ('comedy');
+insert into tblCat (genre) values ('musical');
+
+
+insert into tblCDetail (MovieTitle,gencode,availability) values ('Iron Man','1',10);
+insert into tblCDetail (MovieTitle,gencode,availability) values ('Notebook','2',10);
+insert into tblCDetail (MovieTitle,gencode,availability) values ('Babylon Five','1',10);
+insert into tblCDetail (MovieTitle,gencode,availability) values ('High School Musical','4',10);
+insert into tblCDetail (MovieTitle,gencode,availability) values ('Pidol','3',20);
+
+
+insert into tblcustomer (fname,lname,mname,Street,Purok,BrgyName) values ('Adonis','Balboa','Pilongo','Sanson','Lemonsito','Lumbia');
+insert into tblcustomer (fname,lname,mname,Street,Purok,BrgyName) values ('Edilmer','C','Balbutin','?','?','Lleninza');
+
+
+insert into tblcustomertransaction (services) values ('rent'),('returned');
+
+
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('2013-12-27','1','1','2','50','rent');
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('2013-12-27','2','1','2','50','rent');
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('2013-12-27','1','2','4','100','rent');
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('2013-12-27','1','4','1','1','rent');
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('2013-12-27','2','3','2','150','rent');
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('2013-12-27','1','1','2','50','returned');
