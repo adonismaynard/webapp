@@ -59,8 +59,11 @@ Begin
 if (new.services='rent') then update tblCDetail set availability=availability-new.borrowedDisc
 where cdCode=new.cdCode;
 insert into tblcdonrent (cid,cdCode) values (new.cid,new.cdCode);
+return new;
 else
 insert into tblcdreturned (petsa,cid,cdCode,transactcode) values (now()::date, new.cid,new.cdCode,new.transactcode);
+update tblCDetail set availability=availability+new.borrwedDisc;
+delete from tblcdonrent where cid=new.cid and cdCode=new.cdCode; 
 return new;
 end if;
 end;
