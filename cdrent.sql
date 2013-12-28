@@ -56,10 +56,11 @@ insert into tblcdonrent (cid,cdCode) values (new.cid,new.cdCode);
 else
 insert into tblcdreturned (petsa,cid,cdCode,transactcode) values (now()::date, new.cid,new.cdCode,new.transactcode);
 return new;
+end if;
 end;
 $Body$ language 'plpgsql' volatile cost 100; 
-Alter Function UpdateAvailabilty()owner to postgres;
+Alter Function UpdateAvailability()owner to postgres;
 
 create trigger updateAvailability
 after insert on tbltransaction
-for each row execute procedure UpdateAvailabilty();
+for each row execute procedure UpdateAvailability();
