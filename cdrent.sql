@@ -62,7 +62,7 @@ insert into tblcdonrent (cid,cdCode) values (new.cid,new.cdCode);
 return new;
 else
 insert into tblcdreturned (petsa,cid,cdCode,transactcode) values (now()::date, new.cid,new.cdCode,new.transactcode);
-update tblCDetail set availability=availability+new.borrowedDisc;
+update tblCDetail set availability=availability+new.borrowedDisc where cdCode=new.cdCode;
 
 
 delete from tblcdonrent where cid=new.cid and cdCode=new.cdCode; 
