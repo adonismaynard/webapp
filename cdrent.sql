@@ -21,6 +21,10 @@ BrgyName text not null,
 Unique (fname,lname,mname),
 Primary Key (cid));
 
+create table tblcustomertransaction(
+services text not null,
+primary key (services));
+
 create table tbltransaction(
 transactcode serial not null,
 Petsa date not null,
@@ -28,6 +32,8 @@ cid serial not null,
 cdCode serial not null,
 borrowedDisc int not null,
 rentAmount money not null,
+services text not null,
+foreign key (services) references tblcustomertransaction (services),
 foreign key (cid) references tblcustomer (cid),
 foreign key (cdCode) references tblCDetail(cdCode),
 Primary key (transactcode,cid,cdCode));
@@ -50,7 +56,7 @@ create or replace function UpdateAvailability()
 Returns Trigger as
 $Body$
 Begin
-if (new.transactcode='rent') then update tblCDetail set availability=availability-new.borrowedDisc
+if (new.services='rent') then update tblCDetail set availability=availability-new.borrowedDisc
 where cdCode=new.cdCode;
 insert into tblcdonrent (cid,cdCode) values (new.cid,new.cdCode);
 else
