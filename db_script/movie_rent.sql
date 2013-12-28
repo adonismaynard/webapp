@@ -2,8 +2,10 @@
 genre text not null, 
 primary key (gencode));
 
-insert into tblCat (gencode) values (1,'action');
-insert into tblCat (gencode) values (2,'drama');
+insert into tblCat (genre) values ('action');
+insert into tblCat (genre) values ('drama');
+insert into tblCat (genre) values ('comedy');
+insert into tblCat (genre) values ('musical');
 
 create table tblCDetail(cdCode serial not null, 
 MovieTitle text not null, 
