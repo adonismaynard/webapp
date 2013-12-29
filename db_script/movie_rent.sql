@@ -1,4 +1,4 @@
-/*
+﻿/*
 drop table tblCDreturned;
 drop table tblCDonRent;
 drop table tbltransaction;
@@ -15,6 +15,7 @@ primary key (gencode));
 create table tblCDetail(cdCode serial not null, 
 MovieTitle text not null, 
 gencode serial not null, 
+copyright dec(4) not null,
 availability int not null, 
 Primary key (cdCode),
 Unique (MovieTitle),
@@ -93,11 +94,11 @@ insert into tblCat (genre) values ('comedy');
 insert into tblCat (genre) values ('musical');
 
 
-insert into tblCDetail (MovieTitle,gencode,availability) values ('Iron Man','1',10);
-insert into tblCDetail (MovieTitle,gencode,availability) values ('Notebook','2',10);
-insert into tblCDetail (MovieTitle,gencode,availability) values ('Babylon Five','1',10);
-insert into tblCDetail (MovieTitle,gencode,availability) values ('High School Musical','4',10);
-insert into tblCDetail (MovieTitle,gencode,availability) values ('Pidol','3',20);
+insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Iron Man',1,2011,10);
+insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Notebook',2,2012,10);
+insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Babylon Five',1,2013,10);
+insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('High School Musical',4,2000,10);
+insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Pidol',3,1990,20);
 
 
 insert into tblcustomer (fname,lname,mname,Street,Purok,BrgyName) values ('Adonis','Balboa','Pilongo','Sanson','Lemonsito','Lumbia');

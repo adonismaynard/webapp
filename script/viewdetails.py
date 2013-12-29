@@ -12,7 +12,7 @@ def getmovieinfo(cdcode):
     curr.execute("""
             select tblcdetail.cdcode,
             tblcdetail.movietitle,
-            tblcat.genre,
+            tblcat.genre, tblcdetail.copyright,
             tblcdetail.availability
             from tblcdetail, tblcat
             where tblcat.gencode=tblcdetail.gencode and
@@ -74,7 +74,8 @@ def index(req, cdcode):
     moviecontainer += ' <div class="navar-header"> <div class="alert alert-info">'
     moviecontainer +=  ' <h1>Title: '+movie[1]+'</h1> '
     moviecontainer +=   '<p class="panel-body">Genre:' + movie[2] + ' <br>'
-    moviecontainer +=   '<p class="panel-body">Availability:' + str(movie[3]) + ' <br></div>'
+    moviecontainer +=   '<p class="panel-body">Copyright Year:' + str(movie[3]) + ' <br>'
+    moviecontainer +=   '<p class="panel-body">Availability:' + str(movie[4]) + ' <br></div>'
     moviecontainer += '<br /> <a href="http://pythonista.learning.edu/~maynard/index.py"'
     moviecontainer += 'class="btn btn-success btn-sm active">Main Page</a></p></div></div>'
 
