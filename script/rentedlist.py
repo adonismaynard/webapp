@@ -12,12 +12,20 @@ def cdonrent():
     curr.execute("""
                  SELECT tblcdetail.cdcode,
                  tblcdetail.movietitle as rented_cds,
-                 tblcat.genre
-                 FROM
+                 tblcat.genre, tblcustomer.fname,
+                 tblcustomer.mname, tblcustomer.lname
+                 FROM tblcdonrent,
+                 tbltransaction,
                  tblcdetail,
+                 tblcustomer,
                  tblcat
-                 WHERE
-                 tblcdetail.gencode=tblcat.gencode
+                 WHERE tblcdonrent.cid=tblcustomer.cid and
+                 tblcustomer.cid=tbltransaction.cid
+                 and tblcdonrent.cdcode=tbltransaction.cdcode and
+                 tbltransaction.cdcode=tblcdetail.cdcode and
+                 tbltransaction.services='rent' and
+                 tbltransaction.petsa=tblcdonrent.petsa
+                 and tblcdetail.gencode=tblcat.gencode
                  """)
     rows = curr.fetchall()
     return rows
@@ -116,6 +124,9 @@ def index(req):
         tablecontents += "<tr "+class_+">"
         tablecontents += '<td>'+movie[1]+"</td>"
         tablecontents += '<td>'+movie[2]+"</td>"
+        tablecontents += '<td>'+movie[3]+"</td>"
+        tablecontents += '<td>'+movie[4]+"</td>"
+        tablecontents += '<td>'+movie[5]+"</td>"
         tablecontents += '<td><a href="http://pythonista.learning.edu/~maynard/viewdetails?cdcode='+str(movie[0])+'" class="btn btn-info btn-sm active">Details</a></td>'
         tablecontents += "</tr>"
         i = i + 1

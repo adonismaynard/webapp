@@ -1,4 +1,4 @@
-﻿/*
+﻿
 drop table tblCDreturned;
 drop table tblCDonRent;
 drop table tbltransaction;
@@ -6,7 +6,7 @@ drop table tblcustomertransaction;
 drop table tblcustomer;
 drop table tblCDetail;
 drop table tblCat;
-*/
+
 
 create table tblCat(gencode serial not null, 
 genre text not null, 
@@ -24,12 +24,12 @@ foreign key (gencode) references tblCat(gencode));
 create table tblcustomer(
 cid serial not null,
 fname text not null,
-lname text null,
-mname text not null,
+mname text null,
+lname text not null,
 Street text not null,
 Purok text not null,
 BrgyName text not null,
-Unique (fname,lname,mname),
+Unique (fname,mname,lname),
 Primary Key (cid));
 
 create table tblcustomertransaction(
@@ -101,8 +101,8 @@ insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('High
 insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Pidol',3,1990,20);
 
 
-insert into tblcustomer (fname,lname,mname,Street,Purok,BrgyName) values ('Adonis','Balboa','Pilongo','Sanson','Lemonsito','Lumbia');
-insert into tblcustomer (fname,lname,mname,Street,Purok,BrgyName) values ('Edilmer','C','Balbutin','?','?','Lleninza');
+insert into tblcustomer (fname,mname,lname,Street,Purok,BrgyName) values ('Adonis','Balboa','Pilongo','Sanson','Lemonsito','Lumbia');
+insert into tblcustomer (fname,mname,lname,Street,Purok,BrgyName) values ('Edilmer','C','Balbutin','?','?','Lleninza');
 
 
 insert into tblcustomertransaction (services) values ('rent'),('returned');
