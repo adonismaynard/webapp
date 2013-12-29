@@ -12,19 +12,12 @@ def cdonrent():
     curr.execute("""
                  SELECT tblcdetail.cdcode,
                  tblcdetail.movietitle as rented_cds,
-                 tblcustomer.fname,
-                 tblcustomer.mname,
-                 tblcustomer.lname
-                 FROM tblcdonrent,
-                 tbltransaction,
+                 tblcat.genre
+                 FROM
                  tblcdetail,
-                 tblcustomer
-                 WHERE tblcdonrent.cid=tblcustomer.cid and
-                 tblcustomer.cid=tbltransaction.cid
-                 and tblcdonrent.cdcode=tbltransaction.cdcode and
-                 tbltransaction.cdcode=tblcdetail.cdcode and
-                 tbltransaction.services='rent' and
-                 tbltransaction.petsa=tblcdonrent.petsa
+                 tblcat
+                 WHERE
+                 tblcdetail.gencode=tblcat.gencode
                  """)
     rows = curr.fetchall()
     return rows
@@ -41,7 +34,7 @@ def index(req):
     initial-scale=1.0"><meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-    <title>Theme Template for Bootstrap</title>
+    <title>Using Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -73,7 +66,15 @@ def index(req):
         <p>
         <a href="#" class="btn btn-primary btn-lg"
         role="button">Learn more &raquo;</a></p>
-        </div>"""
+        </div>
+        <p>
+        <button type="button" class="btn btn-lg btn-default">Add CDs</button>
+        <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
+        <button type="button" class="btn btn-lg btn-success">Rented List</button>
+        <button type="button" class="btn btn-lg btn-info">Returned List</button>
+        <button type="button" class="btn btn-lg btn-warning">Add Customer</button>
+        <button type="button" class="btn btn-lg btn-danger">Danger</button>
+      </p>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -93,7 +94,7 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">Rented CDs</div>
+        <div class="panel-heading">CDs for Rent</div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
@@ -113,9 +114,7 @@ def index(req):
         tablecontents += "<tr "+class_+">"
         tablecontents += '<td>'+movie[1]+"</td>"
         tablecontents += '<td>'+movie[2]+"</td>"
-        tablecontents += '<td>'+movie[3]+"</td>"
-        tablecontents += '<td>'+movie[4]+"</td>"
-        tablecontents += '<td><a href="http://pythonista.learning.edu/~maynard/viewdetails?movieid='+str(movie[0])+'" class="btn btn-info btn-sm active">Details</a></td>'
+        tablecontents += '<td><a href="http://pythonista.learning.edu/~maynard/viewdetails?cdcode='+str(movie[0])+'" class="btn btn-info btn-sm active">Details</a></td>'
         tablecontents += "</tr>"
         i = i + 1
     return header + bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
