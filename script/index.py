@@ -14,7 +14,7 @@ def cdonrent():
                  tblcdetail.movietitle as rented_cds,
                  tblcustomer.fname,
                  tblcustomer.mname,
-                 tblcustomer.lname,
+                 tblcustomer.lname
                  FROM tblcdonrent,
                  tbltransaction,
                  tblcdetail,
