@@ -1,4 +1,4 @@
-﻿
+/*
 drop table tblCDreturned;
 drop table tblCDonRent;
 drop table tbltransaction;
@@ -6,6 +6,7 @@ drop table tblcustomertransaction;
 drop table tblcustomer;
 drop table tblCDetail;
 drop table tblCat;
+*/
 
 create table tblCat(gencode serial not null, 
 genre text not null, 
