@@ -26,7 +26,7 @@ def cdonrent():
                  """)
     rows = curr.fetchall()
 def index(req):
-header ="""
+     header ="""
         <!DOCTYPE html>
         <html lang="en">
           <head>
