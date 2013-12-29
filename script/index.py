@@ -40,11 +40,11 @@ header ="""
             <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
             <title>Theme Template for Bootstrap</title>
             <!-- Bootstrap core CSS -->
-            <link href="css/bootstrap.css" rel="stylesheet">
+            <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
             <!-- Bootstrap theme -->
-            <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+            <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
             <!-- Custom styles for this template -->
-            <link href="css/theme.css" rel="stylesheet">
+            <link href="bootstrap/css/theme.css" rel="stylesheet">
             <!-- Just for debugging purposes. Don't actually copy this line! -->
             <!--[if lt IE 9]><script
             src="../../docs-assets/js/ie8-responsive-file-warning.js">
@@ -58,6 +58,8 @@ header ="""
                 src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js">
                 </script>
             <![endif]-->
+            """
+bodybegin="""
           </head>
           <body>
         <div class="container theme-showcase">
@@ -77,6 +79,20 @@ header ="""
                 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
                 <script src="../../dist/js/bootstrap.min.js"></script>
                 <script src="../../docs-assets/js/holder.js"></script>
-              </body>
-            </html>
-            """
+              </body>"""
+    bodyend = """
+           <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+             <script src="https://code.jquery.com/jquery.js"></script>
+           <!-- Include all compiled plugins (below), or include individual files as needed -->
+           <script src="js/bootstrap.min.js"></script>
+           </body>
+           </html>
+    """
+
+
+    """
+
+
+
+
+return header + bodybegin
