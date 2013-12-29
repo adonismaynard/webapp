@@ -1,4 +1,13 @@
-﻿create table tblCat(gencode serial not null, 
+﻿
+drop table tblCDreturned;
+drop table tblCDonRent;
+drop table tbltransaction;
+drop table tblcustomertransaction;
+drop table tblcustomer;
+drop table tblCDetail;
+drop table tblCat;
+
+create table tblCat(gencode serial not null, 
 genre text not null, 
 primary key (gencode));
 
@@ -21,7 +30,6 @@ BrgyName text not null,
 Unique (fname,lname,mname),
 Primary Key (cid));
 
-
 create table tblcustomertransaction(
 services text not null,
 primary key (services));
@@ -39,7 +47,9 @@ foreign key (cid) references tblcustomer (cid),
 foreign key (cdCode) references tblCDetail(cdCode),
 Primary key (transactcode,cid,cdCode));
 
+
 create table tblCDonRent(cid serial not null, 
+Petsa date not null,
 cdCode serial not null,
 Primary key (cid,cdCode),
 foreign key (cid) references tblcustomer (cid),
@@ -53,13 +63,14 @@ transactcode serial not null,
 foreign key (cid,cdCode,transactcode) references tbltransaction(cid,cdCode,transactcode), 
 primary key (cid,cdCode,transactcode));
 
+
 create or replace function UpdateAvailability()
 Returns Trigger as
 $Body$
 Begin
 if (new.services='rent') then update tblCDetail set availability=availability-new.borrowedDisc
 where cdCode=new.cdCode;
-insert into tblcdonrent (cid,cdCode) values (new.cid,new.cdCode);
+insert into tblcdonrent (petsa,cid,cdCode) values (now()::date,new.cid,new.cdCode);
 return new;
 else
 insert into tblcdreturned (petsa,cid,cdCode,transactcode) values (now()::date, new.cid,new.cdCode,new.transactcode);
