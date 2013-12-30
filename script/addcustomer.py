@@ -1,7 +1,7 @@
 import psycopg2
 import cgi
 
-def adgen(gen):
+def adgen(fname,mname,lname,street,purok,brgyname):
     connection = """
     dbname='maynarddb'
     user='maynard'
@@ -11,15 +11,16 @@ def adgen(gen):
     conns = psycopg2.connect(connection)
     currs = conns.cursor()
     currs.execute("""
-    insert into tblcat (genre) values ('"""+str(gen)+"""')
+    insert into tblcustomer (fname,mname,lname,street,purok,brgyname) values ('"""+str(fname)+"""','"""
+    +str(mname)+"""','"""+str(lname)+"""','"""+str(street)+"""','"""+str(purok)+"""','"""+str(brgyname)+"""')
     """)
     conns.commit()
-def index(req,gen):
+def index(req,fname,mname,lname,street,purok,brgyname):
     header = """
         <!DOCTYPE html>
         <html lang="en">
         <head>
-        <META http-equiv="refresh" content="2;URL=genre.py">
+        <META http-equiv="refresh" content="2;URL=customerform.py">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport"
@@ -47,7 +48,7 @@ def index(req,gen):
         <![endif]-->
         """
     bodybegin="""
-        </head><body><h1 class='alert alert-danger'>Added another Genre
+        </head><body><h1 class='alert alert-danger'>Customer's' Name just been added.
         </h1>
         """
     bodyend = """
@@ -67,7 +68,7 @@ def index(req,gen):
         </html>
         """
 
-    result= adgen(gen)
+    result= adgen(fname,mname,lname,street,purok,brgyname)
     result = '<div class="container"> '
     result += ' <div class="navar-header"> <div class="alert alert-info">'
     result +=  ' <h1>Date Rented: '+ str( result )+'</h1> '

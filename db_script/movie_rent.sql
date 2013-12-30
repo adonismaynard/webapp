@@ -17,7 +17,9 @@ create table tblCDetail(cdCode serial not null,
 MovieTitle text not null, 
 gencode serial not null, 
 copyright dec(4) not null,
-availability int not null, 
+availability int not null,
+Petsa date not null,
+RentFee money not null, 
 Primary key (cdCode),
 Unique (MovieTitle),
 foreign key (gencode) references tblCat(gencode));
@@ -95,11 +97,11 @@ insert into tblCat (genre) values ('comedy');
 insert into tblCat (genre) values ('musical');
 
 
-insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Iron Man',1,2011,10);
-insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Notebook',2,2012,10);
-insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Babylon Five',1,2013,10);
-insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('High School Musical',4,2000,10);
-insert into tblCDetail (MovieTitle,gencode,copyright,availability) values ('Pidol',3,1990,20);
+insert into tblCDetail (MovieTitle,gencode,copyright,availability,petsa,rentfee) values ('Iron Man',1,2011,10,now()::date,'25');
+insert into tblCDetail (MovieTitle,gencode,copyright,availability,petsa,rentfee) values ('Notebook',2,2012,10,now()::date,'25');
+insert into tblCDetail (MovieTitle,gencode,copyright,availability,petsa,rentfee) values ('Babylon Five',1,2013,10,now()::date,'25');
+insert into tblCDetail (MovieTitle,gencode,copyright,availability,petsa,rentfee) values ('High School Musical',4,2000,10,now()::date,'25');
+insert into tblCDetail (MovieTitle,gencode,copyright,availability,petsa,rentfee) values ('Pidol',3,1990,20,now()::date,'25');
 
 
 insert into tblcustomer (fname,mname,lname,Street,Purok,BrgyName) values ('Adonis','Balboa','Pilongo','Sanson','Lemonsito','Lumbia');

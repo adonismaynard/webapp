@@ -1,25 +1,27 @@
 import psycopg2
 import cgi
 
-def adgen(gen):
-    connection = """
-    dbname='maynarddb'
-    user='maynard'
-    password='maynard123'
-    host='pythonista.learning.edu'
+def customershow():
+    constr = """
+        dbname='maynarddb'
+        user='maynard'
+        password='maynard123'
+        host='pythonista.learning.edu'
     """
-    conns = psycopg2.connect(connection)
-    currs = conns.cursor()
-    currs.execute("""
-    insert into tblcat (genre) values ('"""+str(gen)+"""')
-    """)
-    conns.commit()
-def index(req,gen):
+    conn = psycopg2.connect(constr)
+    curr = conn.cursor()
+    curr.execute("""
+                 select * from tblcustomer
+                 """)
+    rows = curr.fetchall()
+    return rows
+def index(req):
+
+
     header = """
         <!DOCTYPE html>
         <html lang="en">
         <head>
-        <META http-equiv="refresh" content="2;URL=genre.py">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport"
@@ -47,9 +49,20 @@ def index(req,gen):
         <![endif]-->
         """
     bodybegin="""
-        </head><body><h1 class='alert alert-danger'>Added another Genre
-        </h1>
-        """
+        </head>
+        <body>
+        <div class="container theme-showcase">
+
+        </div>
+        <center>
+        <p>
+        <button type="button" class="btn btn-lg btn-default">Add CDs</button>
+        <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
+        <a href='rentedlist.py' type="button" class="btn btn-lg btn-success">Rented List</a>
+        <a href='returned.py' type="button" class="btn btn-lg btn-info">Returned List</a>
+        <button type="button" class="btn btn-lg btn-warning">Add Customer</button>
+        <button type="button" class="btn btn-lg btn-danger">Add Genre</button>
+      </p></center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -66,10 +79,21 @@ def index(req,gen):
         </body>
         </html>
         """
-
-    result= adgen(gen)
-    result = '<div class="container"> '
-    result += ' <div class="navar-header"> <div class="alert alert-info">'
-    result +=  ' <h1>Date Rented: '+ str( result )+'</h1> '
-
-    return header + bodybegin + bodyend
+    panelbegin = """
+        <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><center>
+        <form action='addcustomer.py'>
+        <table><tr><th>First Name</th><td><input type='text' name='fname'></td></tr>
+        <tr><th>Mid Name</th><td><input type='text' name='mname'></td></tr>
+        <tr><th>Last Name</th><td><input type='text' name='lname'></td></tr>
+        <tr><th>Street</th><td><input type='text' name='street'></td></tr>
+        <tr><th>Purok</th><td><input type='text' name='purok'></td></tr>
+        <tr><th>Barangay</th><td><input type='text' name='brgyname'></td></tr>
+        <tr><td colspan='2'><input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
+        <input type='reset' value='&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
+        </table>
+        </form></center>
+        </div>
+        """
+    return header+ bodybegin + panelbegin + bodyend
