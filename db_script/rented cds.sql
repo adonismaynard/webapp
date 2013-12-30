@@ -1,6 +1,7 @@
-﻿SELECT tblcdetail.cdcode,
+﻿SELECT tblcustomer.cid,tblcdonrent.petsa,
                  tblcdetail.movietitle as rented_cds,
-		 tblcat.genre
+		 tbltransaction.borroweddisc, 
+		 tblcustomer.fname,tblcustomer.mname, tblcustomer.lname
                  FROM tblcdonrent,
                  tbltransaction,
                  tblcdetail,

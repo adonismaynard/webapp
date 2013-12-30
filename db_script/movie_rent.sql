@@ -108,9 +108,8 @@ insert into tblcustomer (fname,mname,lname,Street,Purok,BrgyName) values ('Edilm
 insert into tblcustomertransaction (services) values ('rent'),('returned');
 
 
-insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('12-27-2013','1','1','2','50','rent');
+insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values (now()::date,'1','1','2','50','rent');
 insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values (now()::date,'2','1','2','50','rent');
 insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values (now()::date,'1','2','4','100','rent');
 insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values (now()::date,'1','4','1','1','rent');
 insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values (now()::date,'2','3','2','150','rent');
-insert into tbltransaction(petsa,cid,cdcode,borrowedDisc,rentAmount,services) values ('12-28-2013','1','1','2','50','returned');
