@@ -1,4 +1,5 @@
 import psycopg2
+import cgi
 
 def genshow():
     constr = """
@@ -16,36 +17,37 @@ def genshow():
     return rows
 def index(req):
 
+
     header = """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-    content="width=device-width,
-    initial-scale=1.0"><meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-    <title>Using Bootstrap Template</title>
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="bootstrap/css/theme.css" rel="stylesheet">
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script
-    src="../../docs-assets/js/ie8-responsive-file-warning.js">
-    </script><![endif]-->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5
-    elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="bootstrap/js/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js">
-    </script>
-    <![endif]-->
-    """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport"
+        content="width=device-width,
+        initial-scale=1.0"><meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+        <title>Using Bootstrap Template</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <!-- Bootstrap theme -->
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="bootstrap/css/theme.css" rel="stylesheet">
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script
+        src="../../docs-assets/js/ie8-responsive-file-warning.js">
+        </script><![endif]-->
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5
+        elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="bootstrap/js/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js">
+        </script>
+        <![endif]-->
+        """
     bodybegin="""
         </head>
         <body>
@@ -89,8 +91,8 @@ def index(req):
         <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-        <form action='addgenre.py'>Add Genre: &nbsp
-        <input type='text' name='gen'><input type='submit'>
+        <form action='addgenre.py' >Add Genre: &nbsp
+        <input type='text' name='gen'><input type='submit' >
         </form>
         </div>
         <div class="panel-body">
@@ -117,4 +119,4 @@ def index(req):
         tablecontents += '<td>'+movie[1]+"</td>"
         tablecontents += "</tr>"
         i = i + 1
-    return header + bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
+    return header+ bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
