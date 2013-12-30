@@ -63,9 +63,6 @@ def index(req):
         <div class="jumbotron">
         <h1>Maynard Movies For Rent</h1>
         <p>Your offline movies are here. </p>
-        <p>
-        <a href="#" class="btn btn-primary btn-lg"
-        role="button">Learn more &raquo;</a></p>
         </div>
         <center>
         <p>
