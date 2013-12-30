@@ -9,7 +9,8 @@ drop table tblCat;
 
 
 create table tblCat(gencode serial not null, 
-genre text not null, 
+genre text not null,
+unique (genre), 
 primary key (gencode));
 
 create table tblCDetail(cdCode serial not null, 

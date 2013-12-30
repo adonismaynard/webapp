@@ -19,6 +19,7 @@ def index(req,gen):
         <!DOCTYPE html>
         <html lang="en">
         <head>
+        <META http-equiv="refresh" content="0;URL=genre.py">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport"
@@ -46,8 +47,8 @@ def index(req,gen):
         <![endif]-->
         """
     bodybegin="""
-        </head><body>
-        <p>New Genre just added</p>
+        </head><body><p class='btn btn-lg btn-primary'>Genre just added
+        </p>
         """
     bodyend = """
         <!-- Bootstrap core JavaScript
