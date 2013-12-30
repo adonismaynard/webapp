@@ -11,8 +11,6 @@ def customershow():
         host='pythonista.learning.edu'
     """
 def index(req):
-
-
     header = """
         <!DOCTYPE html>
         <html lang="en">
@@ -82,7 +80,7 @@ def index(req):
         <tr><th>Genre</th><td><input type='text' name='gencode'></td></tr>
         <tr><th>Copyright</th><td><input type='text' name='copyrights'></td></tr>
         <tr><th>No. of CD Copies</th><td><input type='text' name='availability'></td></tr>
-        <tr><th>Date Entry</th><td><input type='text' name='petsa' disabled value="""+str( datetime.date.today())+"""></td></tr>
+        <tr><th>Date Entry</th><td><input type='text' name='petsa' value="""+str( datetime.date.today())+"""></td></tr>
         <tr><th>Rental Fee</th><td><input type='text' name='rentfee'></td></tr>
         <tr><td colspan='2'><input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
         <input type='reset' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>

@@ -1,7 +1,7 @@
 import psycopg2
 import cgi
 
-def adgen(movietitle,genecode,copyrights,availability,petsa,rentfee):
+def adgen(movietitle, gencode, copyrights, availability, petsa, rentfee):
     connection = """
     dbname='maynarddb'
     user='maynard'
@@ -11,16 +11,16 @@ def adgen(movietitle,genecode,copyrights,availability,petsa,rentfee):
     conns = psycopg2.connect(connection)
     currs = conns.cursor()
     currs.execute("""
-    insert into tblcdetail (movietitle,genecode,copyright,availability,petsa,rentfee) values ('"""+str(movietitle)+"""','"""
-    +str(genecode)+"""','"""+str(copyrights)+"""','"""+str(availability)+"""','"""+str(petsa)+"""','"""+str(rentfee)+"""')
+    insert into tblcdetail (movietitle,gencode,copyright,availability,petsa,rentfee) values ('"""+str(movietitle)+"""','"""
+    +str(gencode)+"""','"""+str(copyrights)+"""','"""+str(availability)+"""','"""+str(petsa)+"""','"""+str(rentfee)+"""')
     """)
     conns.commit()
-def index(req,movietitle,genecode,copyright,availability,petsa,rentfee):
+def index(req, movietitle, gencode, copyrights, availability, petsa, rentfee):
     header = """
         <!DOCTYPE html>
         <html lang="en">
         <head>
-        <META http-equiv="refresh" content="2;URL=customerform.py">
+        <META http-equiv="refresh" content="2;URL=addcd.py">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport"
@@ -68,7 +68,7 @@ def index(req,movietitle,genecode,copyright,availability,petsa,rentfee):
         </html>
         """
 
-    result= adgen(movietitle,genecode,copyrights,availability,petsa,rentfee)
+    result= adgen(movietitle, gencode, copyrights, availability, petsa, rentfee)
     result = '<div class="container"> '
     result += ' <div class="navar-header"> <div class="alert alert-info">'
     result +=  ' <h1> '+ str( result )+'</h1> '
