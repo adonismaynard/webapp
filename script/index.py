@@ -69,7 +69,7 @@ def index(req):
         <button type="button" class="btn btn-lg btn-default">Add CDs</button>
         <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
         <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
-        <button type="button" class="btn btn-lg btn-info">Returned List</button>
+        <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
         <button type="button" class="btn btn-lg btn-warning">Add Customer</button>
         <button type="button" class="btn btn-lg btn-danger">Add Genre</button>
       </p></center>"""

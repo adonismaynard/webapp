@@ -11,22 +11,20 @@ def cdonrent():
     curr = conn.cursor()
     curr.execute("""
                  SELECT tblcdetail.cdcode,
-                 tblcdetail.movietitle as rented_cds,
-                 tblcat.genre, tblcustomer.fname,
-                 tblcustomer.mname, tblcustomer.lname,
-                 tblcustomer.cid
-                 FROM tblcdonrent,
+                 tblcdetail.movietitle as returned_cds,
+                 tblcustomer.fname,
+                 tblcustomer.mname,
+                 tblcustomer.lname,
+                 tbltransaction.petsa as Date_Returned
+                 FROM tblcdreturned,
                  tbltransaction,
                  tblcdetail,
-                 tblcustomer,
-                 tblcat
-                 WHERE tblcdonrent.cid=tblcustomer.cid and
-                 tblcustomer.cid=tbltransaction.cid
-                 and tblcdonrent.cdcode=tbltransaction.cdcode and
+                 tblcustomer
+                 WHERE tblcdreturned.cid=tblcustomer.cid and
+                 tblcustomer.cid=tbltransaction.cid and
+                 tblcdreturned.cdcode=tbltransaction.cdcode and
                  tbltransaction.cdcode=tblcdetail.cdcode and
-                 tbltransaction.services='rent' and
-                 tbltransaction.petsa=tblcdonrent.petsa
-                 and tblcdetail.gencode=tblcat.gencode
+                 tbltransaction.services='returned'
                  """)
     rows = curr.fetchall()
     return rows
@@ -116,8 +114,8 @@ def index(req):
     movies = cdonrent()
     tablecontents = ""
     tablecontents +="""<tr><th>Movie Title</th>
-    <th>Genre</th><th>First Name</th>
-    <th>Middle Name</th><th>Last Name</th><th>Click Below</th></tr>"""
+    <th>First Name</th>
+    <th>Middle Name</th><th>Last Name</th><th>Date Returned</th></tr>"""
     i = 1
     for movie in movies:
         if i % 2 == 0:
@@ -129,8 +127,7 @@ def index(req):
         tablecontents += '<td>'+movie[2]+"</td>"
         tablecontents += '<td>'+movie[3]+"</td>"
         tablecontents += '<td>'+movie[4]+"</td>"
-        tablecontents += '<td>'+movie[5]+"</td>"
-        tablecontents += '<td><a href="http://pythonista.learning.edu/~maynard/onrentviewdetails?cdcode='+str(movie[0])+'&cid='+str(movie[6])+'& class="btn btn-info btn-sm active">Details</a></td>'
+        tablecontents += '<td>'+str(movie[5])+"</td>"
         tablecontents += "</tr>"
         i = i + 1
     return header + bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
