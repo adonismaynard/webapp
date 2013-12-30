@@ -102,7 +102,7 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">CDs On Rent</div>
+        <div class="panel-heading">Returned CDs</div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
