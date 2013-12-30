@@ -1,6 +1,10 @@
 import psycopg2
+import cgi
 
-def genre():
+
+
+
+def genshow():
     constr = """
         dbname='maynarddb'
         user='maynard'
@@ -10,13 +14,27 @@ def genre():
     conn = psycopg2.connect(constr)
     curr = conn.cursor()
     curr.execute("""
-                 Select * from tblcat
+                 select * from tblcat
                  """)
     rows = curr.fetchall()
     return rows
-
 def index(req):
-    header = """
+
+    def adgen(gen):
+        const = """
+        dbname='maynarddb'
+        user='maynard'
+        password='maynard123'
+        host='pythonista.learning.edu'
+        """
+    conn = psycopg2.connect(const)
+    currs = conn.cursor()
+    currs.execute('insert into tblcat (genre) values (gen)')
+    rows = currs.fetchall()
+    return rows
+    def index(req):
+
+        header = """
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -55,7 +73,7 @@ def index(req):
         -->
         <div class="jumbotron">
         <h1>Maynard Movies For Rent</h1>
-        <p>Genre List </p>
+        <p>Genre Listings</p>
         <p>
         <a href="http://pythonista.learning.edu/~maynard/index.py" class="btn btn-primary btn-lg"
         role="button">Main Page &raquo;</a></p>
@@ -88,7 +106,11 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">Returned CDs</div>
+        <div class="panel-heading">
+        <form action='addgenre.py' method='post'>Add Genre: &nbsp
+        <input type='text' name='gen'><input type='submit' >
+        </form>
+        </div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
@@ -97,7 +119,7 @@ def index(req):
        </div>
       </div>
       """
-    movies = genre()
+    movies = genshow()
     tablecontents = ""
     tablecontents +="""<tr><th>Code:</th>
     <th>Genre</th>

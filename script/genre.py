@@ -1,6 +1,6 @@
 import psycopg2
 
-def adgen(gen):
+def genshow():
     constr = """
         dbname='maynarddb'
         user='maynard'
@@ -10,12 +10,12 @@ def adgen(gen):
     conn = psycopg2.connect(constr)
     curr = conn.cursor()
     curr.execute("""
-                 INSERT into tblcat (genre) values (gen)
+                 select * from tblcat
                  """)
     rows = curr.fetchall()
     return rows
-
 def index(req):
+
     header = """
     <!DOCTYPE html>
     <html lang="en">
@@ -55,7 +55,7 @@ def index(req):
         -->
         <div class="jumbotron">
         <h1>Maynard Movies For Rent</h1>
-        <p>Returned List </p>
+        <p>Genre Listings</p>
         <p>
         <a href="http://pythonista.learning.edu/~maynard/index.py" class="btn btn-primary btn-lg"
         role="button">Main Page &raquo;</a></p>
@@ -88,7 +88,11 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">Returned CDs</div>
+        <div class="panel-heading">
+        <form action='addgenre.py'>Add Genre: &nbsp
+        <input type='text' name='gen'><input type='submit'>
+        </form>
+        </div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
@@ -97,11 +101,11 @@ def index(req):
        </div>
       </div>
       """
-    movies = cdonrent()
+    movies = genshow()
     tablecontents = ""
-    tablecontents +="""<tr><th>Movie Title</th>
-    <th>First Name</th>
-    <th>Middle Name</th><th>Last Name</th><th>Date Returned</th></tr>"""
+    tablecontents +="""<tr><th>Code:</th>
+    <th>Genre</th>
+    </tr>"""
     i = 1
     for movie in movies:
         if i % 2 == 0:
@@ -109,11 +113,8 @@ def index(req):
         else:
             class_=""
         tablecontents += "<tr "+class_+">"
+        tablecontents += '<td>'+str(movie[0])+"</td>"
         tablecontents += '<td>'+movie[1]+"</td>"
-        tablecontents += '<td>'+movie[2]+"</td>"
-        tablecontents += '<td>'+movie[3]+"</td>"
-        tablecontents += '<td>'+movie[4]+"</td>"
-        tablecontents += '<td>'+str(movie[5])+"</td>"
         tablecontents += "</tr>"
         i = i + 1
     return header + bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
