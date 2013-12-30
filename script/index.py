@@ -66,7 +66,7 @@ def index(req):
         </div>
         <center>
         <p>
-        <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</button>
+        <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a>
         <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
         <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
         <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>

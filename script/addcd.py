@@ -1,5 +1,7 @@
 import psycopg2
 import cgi
+import datetime
+import time
 
 def customershow():
     constr = """
@@ -8,13 +10,6 @@ def customershow():
         password='maynard123'
         host='pythonista.learning.edu'
     """
-    conn = psycopg2.connect(constr)
-    curr = conn.cursor()
-    curr.execute("""
-                 select * from tblcustomer
-                 """)
-    rows = curr.fetchall()
-    return rows
 def index(req):
 
 
@@ -52,16 +47,15 @@ def index(req):
         </head>
         <body>
         <div class="container theme-showcase">
-
         </div>
         <center>
         <p>
-        <button type="button" class="btn btn-lg btn-default">Add CDs</button>
+        <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a>
         <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
-        <a href='rentedlist.py' type="button" class="btn btn-lg btn-success">Rented List</a>
-        <a href='returned.py' type="button" class="btn btn-lg btn-info">Returned List</a>
-        <button type="button" class="btn btn-lg btn-warning">Add Customer</button>
-        <button type="button" class="btn btn-lg btn-danger">Add Genre</button>
+        <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
+        <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
+        <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</button>
+        <a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a>
       </p></center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
@@ -82,16 +76,16 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><center>
-        <form action='addcustomer.py'>
-        <table><tr><th>First Name</th><td><input type='text' name='fname'></td></tr>
-        <tr><th>Mid Name</th><td><input type='text' name='mname'></td></tr>
-        <tr><th>Last Name</th><td><input type='text' name='lname'></td></tr>
-        <tr><th>Street</th><td><input type='text' name='street'></td></tr>
-        <tr><th>Purok</th><td><input type='text' name='purok'></td></tr>
-        <tr><th>Barangay</th><td><input type='text' name='brgyname'></td></tr>
-        <tr><td colspan='2'><input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
-        <input type='reset' value='&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
+        <div class="panel-heading"><center><h1>NEW MOVIE COPIES</h1>
+        <form action='savecd.py'>
+        <table><tr><th>Movie Title</th><td><input type='text' name='movietitle'></td></tr>
+        <tr><th>Genre</th><td><input type='text' name='gencode'></td></tr>
+        <tr><th>Copyright</th><td><input type='text' name='copyrights'></td></tr>
+        <tr><th>No. of CD Copies</th><td><input type='text' name='availability'></td></tr>
+        <tr><th>Date Entry</th><td><input type='text' name='petsa' disabled value="""+str( datetime.date.today())+"""></td></tr>
+        <tr><th>Rental Fee</th><td><input type='text' name='rentfee'></td></tr>
+        <tr><td colspan='2'><input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
+        <input type='reset' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
         </table>
         </form></center>
         </div>

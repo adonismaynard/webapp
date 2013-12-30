@@ -1,7 +1,7 @@
 import psycopg2
 import cgi
 
-def adgen(fname,mname,lname,street,purok,brgyname):
+def adgen(movietitle,genecode,copyrights,availability,petsa,rentfee):
     connection = """
     dbname='maynarddb'
     user='maynard'
@@ -11,11 +11,11 @@ def adgen(fname,mname,lname,street,purok,brgyname):
     conns = psycopg2.connect(connection)
     currs = conns.cursor()
     currs.execute("""
-    insert into tblcustomer (fname,mname,lname,street,purok,brgyname) values ('"""+str(fname)+"""','"""
-    +str(mname)+"""','"""+str(lname)+"""','"""+str(street)+"""','"""+str(purok)+"""','"""+str(brgyname)+"""')
+    insert into tblcdetail (movietitle,genecode,copyright,availability,petsa,rentfee) values ('"""+str(movietitle)+"""','"""
+    +str(genecode)+"""','"""+str(copyrights)+"""','"""+str(availability)+"""','"""+str(petsa)+"""','"""+str(rentfee)+"""')
     """)
     conns.commit()
-def index(req,fname,mname,lname,street,purok,brgyname):
+def index(req,movietitle,genecode,copyright,availability,petsa,rentfee):
     header = """
         <!DOCTYPE html>
         <html lang="en">
@@ -48,7 +48,7 @@ def index(req,fname,mname,lname,street,purok,brgyname):
         <![endif]-->
         """
     bodybegin="""
-        </head><body><h1 class='alert alert-danger'>Customer's' Name just been added.
+        </head><body><h1 class='alert alert-danger'>New Movie CD just been added.
         </h1>
         """
     bodyend = """
@@ -68,9 +68,9 @@ def index(req,fname,mname,lname,street,purok,brgyname):
         </html>
         """
 
-    result= adgen(fname,mname,lname,street,purok,brgyname)
+    result= adgen(movietitle,genecode,copyrights,availability,petsa,rentfee)
     result = '<div class="container"> '
     result += ' <div class="navar-header"> <div class="alert alert-info">'
-    result +=  ' <h1>Date Rented: '+ str( result )+'</h1> '
+    result +=  ' <h1> '+ str( result )+'</h1> '
 
     return header + bodybegin + bodyend

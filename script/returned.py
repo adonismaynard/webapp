@@ -76,12 +76,12 @@ def index(req):
         </div>
         <center>
         <p>
-        <button type="button" class="btn btn-lg btn-default">Add CDs</button>
+        <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a>
         <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
-        <a href='rentedlist.py' type="button" class="btn btn-lg btn-success">Rented List</a>
-        <a href='returned.py' type="button" class="btn btn-lg btn-info">Returned List</a>
-        <button type="button" class="btn btn-lg btn-warning">Add Customer</button>
-        <button type="button" class="btn btn-lg btn-danger">Add Genre</button>
+        <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
+        <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
+        <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</button>
+        <a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a>
       </p></center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
