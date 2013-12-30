@@ -60,19 +60,21 @@ def index(req):
         <!-- Main jumbotron for a primary
         marketing message or call to action
         -->
+        <center>
         <div class="jumbotron">
+        <center>
         <h1>Maynard Movies For Rent</h1>
         <p>Your offline movies are here. </p>
+        <table><tr>
+        <td><a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a></td>
+        <td><button type="button" class="btn btn-lg btn-primary">CD Transactions</button></td>
+        <td><a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a></td>
+        <td><a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a></td>
+        <td><a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a></td>
+        <td><a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a></td></tr></table></center>
         </div>
-        <center>
         <p>
-        <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a>
-        <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
-        <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
-        <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
-        <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</button>
-        <a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a>
-      </p></center>"""
+      </p>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
         ================================================== -->

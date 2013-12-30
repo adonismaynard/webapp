@@ -52,7 +52,7 @@ def index(req):
         <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
         <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
         <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
-        <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</button>
+        <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a>
         <a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a>
       </p></center>"""
     bodyend = """
@@ -82,7 +82,7 @@ def index(req):
         <tr><th>No. of CD Copies</th><td><input type='text' name='availability'></td></tr>
         <tr><th>Date Entry</th><td><input type='text' name='petsa' value="""+str( datetime.date.today())+"""></td></tr>
         <tr><th>Rental Fee</th><td><input type='text' name='rentfee'></td></tr>
-        <tr><td colspan='2'><input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
+        <tr><td colspan='2'> <input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
         <input type='reset' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
         </table>
         </form></center>
