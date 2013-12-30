@@ -1,6 +1,6 @@
 import psycopg2
 
-def cdonrent():
+def genre():
     constr = """
         dbname='maynarddb'
         user='maynard'
@@ -10,14 +10,7 @@ def cdonrent():
     conn = psycopg2.connect(constr)
     curr = conn.cursor()
     curr.execute("""
-                 SELECT tblcdetail.cdcode,
-                 tblcdetail.movietitle as rented_cds,
-                 tblcat.genre
-                 FROM
-                 tblcdetail,
-                 tblcat
-                 WHERE
-                 tblcdetail.gencode=tblcat.gencode
+                 Select * from tblcat
                  """)
     rows = curr.fetchall()
     return rows
@@ -62,16 +55,19 @@ def index(req):
         -->
         <div class="jumbotron">
         <h1>Maynard Movies For Rent</h1>
-        <p>Your offline movies are here. </p>
+        <p>Genre List </p>
+        <p>
+        <a href="http://pythonista.learning.edu/~maynard/index.py" class="btn btn-primary btn-lg"
+        role="button">Main Page &raquo;</a></p>
         </div>
         <center>
         <p>
         <button type="button" class="btn btn-lg btn-default">Add CDs</button>
         <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
-        <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
-        <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
+        <a href='rentedlist.py' type="button" class="btn btn-lg btn-success">Rented List</a>
+        <a href='returned.py' type="button" class="btn btn-lg btn-info">Returned List</a>
         <button type="button" class="btn btn-lg btn-warning">Add Customer</button>
-        <a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a>
+        <button type="button" class="btn btn-lg btn-danger">Add Genre</button>
       </p></center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
@@ -92,7 +88,7 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">CDs for Rent</div>
+        <div class="panel-heading">Returned CDs</div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
@@ -101,9 +97,11 @@ def index(req):
        </div>
       </div>
       """
-    movies = cdonrent()
+    movies = genre()
     tablecontents = ""
-    tablecontents +="<tr><th>Movie Title</th><th>Genre</th><th>Click Below</th></tr>"
+    tablecontents +="""<tr><th>Code:</th>
+    <th>Genre</th>
+    </tr>"""
     i = 1
     for movie in movies:
         if i % 2 == 0:
@@ -111,9 +109,8 @@ def index(req):
         else:
             class_=""
         tablecontents += "<tr "+class_+">"
+        tablecontents += '<td>'+str(movie[0])+"</td>"
         tablecontents += '<td>'+movie[1]+"</td>"
-        tablecontents += '<td>'+movie[2]+"</td>"
-        tablecontents += '<td><a href="http://pythonista.learning.edu/~maynard/viewdetails?cdcode='+str(movie[0])+'" class="btn btn-info btn-sm active">Details</a></td>'
         tablecontents += "</tr>"
         i = i + 1
     return header + bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
