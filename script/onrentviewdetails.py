@@ -1,5 +1,8 @@
 import psycopg2
 import cgi
+import datetime
+import time
+
 def getmovieinfo(cdcode,cid):
     constr = """
        dbname='maynarddb'
@@ -10,10 +13,15 @@ def getmovieinfo(cdcode,cid):
     conn = psycopg2.connect(constr)
     curr = conn.cursor()
     curr.execute("""
-                 select tblcustomer.cid,tblcdonrent.petsa,
+                 select tblcustomer.cid,
+                 tblcdonrent.petsa,
                  tblcdetail.movietitle as rented_cds,
                  tbltransaction.borroweddisc,
-                 tblcustomer.fname,tblcustomer.mname, tblcustomer.lname
+                 tblcustomer.fname,
+                 tblcustomer.mname,
+                 tblcustomer.lname,
+                 tbltransaction.cdcode,
+                 tbltransaction.rentamount
                  FROM tblcdonrent,
                  tbltransaction,
                  tblcdetail,
@@ -62,7 +70,7 @@ def index(cdcode,cid):
     elements and media queries -->
     <!--[if lt IE 9]>
     <script src="bootstrap/js/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js">
+    <script src="bootstrap/js/respond.min.js">
     </script>
     <![endif]-->
     """
@@ -86,11 +94,19 @@ def index(cdcode,cid):
     movie = getmovieinfo(cdcode,cid)
     moviecontainer = '<div class="container"> '
     moviecontainer += ' <div class="navar-header"> <div class="alert alert-info">'
-    moviecontainer +=  ' <h1>Date Rented: '+str(movie[1])+'</h1> '
-    moviecontainer +=   '<h2 class="panel-body">Movie Title:' + movie[2] + ' </h2>'
-    moviecontainer +=   '<h3 class="panel-body">No. of Disc Borrowed:' + str(movie[3]) + '</h3> '
-    moviecontainer +=   '<h4 class="panel-body">Borrower Name:' + movie[4] + '&nbsp;' + movie[5] + '&nbsp;' + movie[6] + ' </h4><br> </div>'
-    moviecontainer += '<br /> <a href="http://pythonista.learning.edu/~maynard/index.py"'
-    moviecontainer += 'class="btn btn-success btn-sm active">Main Page</a></p></div></div>'
-
+    moviecontainer += ' <h1>Date Rented: '+str(movie[1])+'</h1> '
+    moviecontainer += '<h2 class="panel-body">Movie Title:' + movie[2] + ' </h2>'
+    moviecontainer += '<h3 class="panel-body">No. of Disc Borrowed:' + str(movie[3]) + '</h3> '
+    moviecontainer += '<h4 class="panel-body">Borrower Name:' + movie[4] + '&nbsp;' + movie[5] + '&nbsp;' + movie[6] + ' </h4><br> </div>'
+    moviecontainer += '<br /><a href="http://pythonista.learning.edu/~maynard/index.py"'
+    moviecontainer += 'class="btn btn-success btn-sm active">Main Page</a>'
+    moviecontainer += """<p class='form-control'><center><form action='savetransact.py' class='form-control'>
+    <input type='hidden' name='petsa' class='form-control' value="""+str( datetime.date.today())+""">
+    <input type='hidden' class='form-control' name='cid' value='"""+str(movie[0])+"""'>
+    <input type='hidden'class='form-control' name='cdcode' value='"""+str(movie[7])+"""'>
+    <input type='hidden' class='form-control' name='borroweddisc' value='"""+str(movie[3])+"""'>
+    <center> Penalty &nbsp;<input type='class='form-control' text' name='rentamount' ></center>
+    <input type='hidden' class='form-control' name='services' value='returned'>
+    <input type='submit' class='form-control' value='Click Here if Return' class="btn btn-lg btn-success">
+    </form></centrol></p></div></div></div>"""
     return header + bodybegin  + moviecontainer + bodyend

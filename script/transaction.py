@@ -84,8 +84,7 @@ def index(req):
         <tr><th>CD Code*</th><td><input type='text' name='cdcode'></td></tr>
         <tr><th>Number of Copy/ies*</th><td><input type='text' name='borroweddisc'></td></tr>
         <tr><th>Payment*</th><td><input type='text' name='rentamount'></td></tr>
-
-        <tr><th>Service Rendered*</th><td>rent <input type='radio' name='services' value='rent'><br>returned<input type='radio' name='services' value='returned'></td></tr>
+        <tr><th>Service Rendered*</th><td><input type='hidden' name='services' value='rent'></td></tr>
         <tr><td colspan='2'> <input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
         <input type='reset' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
         </table>

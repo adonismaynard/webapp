@@ -106,7 +106,7 @@ def index(req):
       """
     movie = cdonrent()
     tablecontents = ""
-    tablecontents +="<tr><th>Movie Title</th><th>Rental Fee</th><th>Available CDs</th><th>Click Below</th></tr>"
+    tablecontents +="<tr><th>CODE</th><th>Movie Title</th><th>Rental Fee</th><th>Available CDs</th><th>Click Below</th></tr>"
     i = 1
     for movie in movie:
         if i % 2 == 0:
@@ -114,6 +114,7 @@ def index(req):
         else:
             class_=""
         tablecontents += "<tr "+class_+">"
+        tablecontents += '<td>'+str(movie[0])+"</td>"
         tablecontents += '<td>'+movie[1]+"</td>"
         tablecontents += '<td>'+movie[2]+"</td>"
         tablecontents += '<td>'+str(movie[3])+"</td>"
