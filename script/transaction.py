@@ -49,7 +49,7 @@ def index(req):
         <center>
         <p>
         <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a>
-        <button type="button" class="btn btn-lg btn-primary">CD Transactions</button>
+        <td><a href="transaction.py" type="button" class="btn btn-lg btn-primary">CD Transactions</a></td>
         <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
         <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
         <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a>
@@ -74,14 +74,17 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><center><h1>NEW MOVIE COPIES</h1>
-        <form action='savecd.py'>
-        <table><tr><th>Movie Title</th><td><input type='text' name='movietitle'></td></tr>
-        <tr><th>Genre</th><td><input type='text' name='gencode'></td></tr>
-        <tr><th>Copyright</th><td><input type='text' name='copyrights'></td></tr>
-        <tr><th>No. of CD Copies</th><td><input type='text' name='availability'></td></tr>
-        <input type='hidden' name='petsa' value="""+str( datetime.date.today())+""">
-        <tr><th>Rental Fee</th><td><input type='text' name='rentfee'></td></tr>
+        <div class="panel-heading"><center><h1>BORROWER'S TRANSACTION</h1>
+        <form action='savetransact.py'>
+        <table><tr><th>
+                <input type='hidden' name='petsa' value="""+str( datetime.date.today())+""">
+                Membersip ID*</th><td><input type='text' name='cid'>
+                </td></tr>
+        <tr><th>CD Code*</th><td><input type='text' name='cdcode'></td></tr>
+        <tr><th>Number of Copy/ies*</th><td><input type='text' name='borroweddisc'></td></tr>
+        <tr><th>Payment*</th><td><input type='text' name='rentamount'></td></tr>
+
+        <tr><th>Service Rendered*</th><td>rent <input type='radio' name='services' value='rent'><br>returned<input type='radio' name='services' value='returned'></td></tr>
         <tr><td colspan='2'> <input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
         <input type='reset' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
         </table>

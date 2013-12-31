@@ -12,12 +12,12 @@ def cdonrent():
     curr.execute("""
                  SELECT tblcdetail.cdcode,
                  tblcdetail.movietitle as rented_cds,
-                 tblcdetail.rentfee, tblcdetail.availability
+                 tblcdetail.rentfee, tblcdetail.availability,tblcdetail.petsa
                  FROM
                  tblcdetail,
                  tblcat
                  WHERE
-                 tblcdetail.gencode=tblcat.gencode
+                 tblcdetail.petsa <= now()::date order by petsa desc limit 10 offset 5
                  """)
     rows = curr.fetchall()
     return rows
@@ -63,7 +63,7 @@ def index(req):
         <center>
         <div class="jumbotron">
         <center>
-        <h1>Maynard Movies For Rent</h1>
+        <h1>Latest CD Movies For Rent</h1>
         <p>Your offline movies are here. </p>
         <table><tr>
         <td><a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a></td>
@@ -94,8 +94,7 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">CDs for Rent<a href="latestcds.py" class="panel-title"
-        role="button" align="right">New Customer Click Here</a href></div>
+        <div class="panel-heading">Latest CDs</div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
