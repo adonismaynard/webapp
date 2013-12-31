@@ -73,23 +73,29 @@ def index(req):
         </html>
         """
     panelbegin = """
-        <div class="panel panel-default">
+        <div class='container theme-showcase'>
+        <div class="row">
         <!-- Default panel contents -->
-        <div class="panel-heading"><center><h1>NEW MOVIE COPIES</h1>
+        <div class="col-sm-4"><center><h1>NEW MOVIE COPIES</h1>
         <form action='savecd.py'>
         <table><tr><th>Movie Title</th><td><input type='text' name='movietitle'></td></tr>
-        <tr><th>Genre</th><td><input type='text' name='gencode'></td></tr>
+        <tr><th>Genre Code</th><td><input type='text' name='gencode'></td></tr>
         <tr><th>Copyright</th><td><input type='text' name='copyrights'></td></tr>
         <tr><th>No. of CD Copies</th><td><input type='text' name='availability'></td></tr>
         <input type='hidden' name='petsa' value="""+str( datetime.date.today())+""">
         <tr><th>Rental Fee</th><td><input type='text' name='rentfee'></td></tr>
         <tr><td colspan='2'> <input type='submit' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAVE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-success">
         <input type='reset' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLEAR&nbsp;&nbsp;&nbsp;&nbsp;' class="btn btn-lg btn-warning"></td></tr>
-        </table>
-        </form></center>
+        </table></form></center>
         <p>
         <a href="http://pythonista.learning.edu/~maynard/index.py" class="btn btn-primary btn-lg"
         role="button">Main Page &raquo;</a></p>
         </div>
+        <div class="col-sm-4">
+        <div class='list-group'>
+        <p class='list-group-item-text'>hello</p>
+        </div>
+        </div></div>
+
         """
     return header+ bodybegin + panelbegin + bodyend
