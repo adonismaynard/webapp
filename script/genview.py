@@ -1,31 +1,27 @@
 import psycopg2
 import cgi
 
-def adgen(movietitle, gencode, copyrights, availability, petsa, rentfee):
-    connection = """
-    dbname='maynarddb'
-    user='maynard'
-    password='maynard123'
-    host='pythonista.learning.edu'
+def genshow():
+    constr = """
+        dbname='maynarddb'
+        user='maynard'
+        password='maynard123'
+        host='pythonista.learning.edu'
     """
-    conns = psycopg2.connect(connection)
-    currs = conns.cursor()
-    currs.execute("""
-    insert into tblcdetail (movietitle,gencode,copyright,availability,petsa,rentfee)
-    values ('"""+str(movietitle)+"""',
-        '"""+str(gencode)+"""',
-        '"""+str(copyrights)+"""',
-        '"""+str(availability)+"""',
-        '"""+str(petsa)+"""',
-        '"""+str(rentfee)+"""')
-    """)
-    conns.commit()
-def index(req, movietitle, gencode, copyrights, availability, petsa, rentfee):
+    conn = psycopg2.connect(constr)
+    curr = conn.cursor()
+    curr.execute("""
+                 select * from tblcat
+                 """)
+    rows = curr.fetchall()
+    return rows
+def index(req):
+
+
     header = """
         <!DOCTYPE html>
         <html lang="en">
         <head>
-        <META http-equiv="refresh" content="2;URL=addcd.py">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport"
@@ -53,9 +49,9 @@ def index(req, movietitle, gencode, copyrights, availability, petsa, rentfee):
         <![endif]-->
         """
     bodybegin="""
-        </head><body><h1 class='alert alert-danger'>New Movie CD just been added.
-        </h1>
-        """
+        </head>
+        <body>
+        </center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -72,10 +68,36 @@ def index(req, movietitle, gencode, copyrights, availability, petsa, rentfee):
         </body>
         </html>
         """
-
-    result= adgen(movietitle, gencode, copyrights, availability, petsa, rentfee)
-    resultcontainer = '<div class="container"> '
-    resultcontainer += ' <div class="navar-header"> <div class="alert alert-info">'
-    resultcontainer +=  '</div></div>'
-
-    return header + bodybegin + bodyend
+    panelbegin = """
+        <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+        <form action='addgenre.py' >Add Genre: &nbsp
+        <input type='text' name='gen'><input type='submit' >
+        </form>
+        </div>
+        <div class="panel-body">
+        """
+    tablebegin = """<table class="table table-hover table-condensed">"""
+    tableend = "</table>"
+    panelend = """
+       </div>
+      </div>
+      """
+    movies = genshow()
+    tablecontents = ""
+    tablecontents +="""<tr><th>Code:</th>
+    <th>Genre</th>
+    </tr>"""
+    i = 1
+    for movie in movies:
+        if i % 2 == 0:
+            class_ = 'class="warning"'
+        else:
+            class_=""
+        tablecontents += "<tr "+class_+">"
+        tablecontents += '<td>'+str(movie[0])+"</td>"
+        tablecontents += '<td>'+movie[1]+"</td>"
+        tablecontents += "</tr>"
+        i = i + 1
+    return header+ bodybegin + panelbegin + tablebegin + tablecontents + tableend + panelend + bodyend
