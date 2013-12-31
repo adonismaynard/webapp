@@ -69,8 +69,8 @@ def index(req,fname,mname,lname,street,purok,brgyname):
         """
 
     result= adgen(fname,mname,lname,street,purok,brgyname)
-    result = '<div class="container"> '
-    result += ' <div class="navar-header"> <div class="alert alert-info">'
-    result +=  ' <h1>Date Rented: '+ str( result )+'</h1> '
+    resultcontainer = '<div class="container"> '
+    resultcontainer += ' <div class="navar-header"> <div class="alert alert-info">'
+    resultcontainer +=  ' <h1>Date Rented: '+ str( result[0] )+'</h1> '
 
     return header + bodybegin + bodyend

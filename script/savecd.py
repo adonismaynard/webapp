@@ -11,8 +11,13 @@ def adgen(movietitle, gencode, copyrights, availability, petsa, rentfee):
     conns = psycopg2.connect(connection)
     currs = conns.cursor()
     currs.execute("""
-    insert into tblcdetail (movietitle,gencode,copyright,availability,petsa,rentfee) values ('"""+str(movietitle)+"""','"""
-    +str(gencode)+"""','"""+str(copyrights)+"""','"""+str(availability)+"""','"""+str(petsa)+"""','"""+str(rentfee)+"""')
+    insert into tblcdetail (movietitle,gencode,copyright,availability,petsa,rentfee)
+    values ('"""+str(movietitle)+"""',
+        '"""+str(gencode)+"""',
+        '"""+str(copyrights)+"""',
+        '"""+str(availability)+"""',
+        '"""+str(petsa)+"""',
+        '"""+str(rentfee)+"""')
     """)
     conns.commit()
 def index(req, movietitle, gencode, copyrights, availability, petsa, rentfee):
@@ -71,6 +76,6 @@ def index(req, movietitle, gencode, copyrights, availability, petsa, rentfee):
     result= adgen(movietitle, gencode, copyrights, availability, petsa, rentfee)
     result = '<div class="container"> '
     result += ' <div class="navar-header"> <div class="alert alert-info">'
-    result +=  ' <h1> '+ str( result )+'</h1> '
+    result +=  ' <h1> '+ str( result[0])+'</h1> '
 
     return header + bodybegin + bodyend

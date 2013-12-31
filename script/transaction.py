@@ -48,12 +48,13 @@ def index(req):
         </div>
         <center>
         <p>
-        <a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a>
+        <table><tr>
+        <td><a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a></td>
         <td><a href="transaction.py" type="button" class="btn btn-lg btn-primary">CD Transactions</a></td>
-        <a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a>
-        <a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a>
-        <a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a>
-        <a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a>
+        <td><a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a></td>
+        <td><a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a></td>
+        <td><a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a></td>
+        <td><a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a></td></tr></table>
       </p></center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript

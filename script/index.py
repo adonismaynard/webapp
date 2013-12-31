@@ -94,8 +94,8 @@ def index(req):
     panelbegin = """
         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">CDs for Rent<a href="latestcds.py" class="panel-title"
-        role="button" align="right">New Customer Click Here</a href></div>
+        <div class="panel-heading"><blink><a href="latestcds.py" class="panel-title"
+        role="button" align="right">Latest CDs Click Here!</a href></blink></div>
         <div class="panel-body">
         """
     tablebegin = """<table class="table table-hover table-condensed">"""
@@ -104,11 +104,11 @@ def index(req):
        </div>
       </div>
       """
-    movies = cdonrent()
+    movie = cdonrent()
     tablecontents = ""
     tablecontents +="<tr><th>Movie Title</th><th>Rental Fee</th><th>Available CDs</th><th>Click Below</th></tr>"
     i = 1
-    for movie in movies:
+    for movie in movie:
         if i % 2 == 0:
             class_ = 'class="warning"'
         else:

@@ -64,17 +64,16 @@ def index(req):
         <div class="jumbotron">
         <center>
         <h1>Latest CD Movies For Rent</h1>
-        <p>Your offline movies are here. </p>
+        <p>Your offline movies are here.
         <table><tr>
         <td><a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a></td>
         <td><a href="transaction.py" type="button" class="btn btn-lg btn-primary">CD Transactions</a></td>
         <td><a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a></td>
         <td><a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a></td>
         <td><a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a></td>
-        <td><a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a></td></tr></table></center>
+        <td><a href='genre.py' type="button" class="btn btn-lg btn-danger">Add Genre</a></td></tr></table>
         </div>
-        <p>
-      </p>"""
+        </p></center>"""
     bodyend = """
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -103,11 +102,11 @@ def index(req):
        </div>
       </div>
       """
-    movies = cdonrent()
+    movie = cdonrent()
     tablecontents = ""
     tablecontents +="<tr><th>Movie Title</th><th>Rental Fee</th><th>Available CDs</th><th>Click Below</th></tr>"
     i = 1
-    for movie in movies:
+    for movie in movie:
         if i % 2 == 0:
             class_ = 'class="warning"'
         else:
