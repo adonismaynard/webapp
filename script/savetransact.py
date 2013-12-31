@@ -69,8 +69,8 @@ def index(req, petsa, cid, cdcode, borroweddisc, rentamount, services):
         """
 
     result= adgen(petsa, cid, cdcode, borroweddisc, rentamount, services)
-    result = '<div class="container"> '
-    result += ' <div class="navar-header"> <div class="alert alert-info">'
-    result +=  ' <h1> '+ str( result )+'</h1> '
+    resultcontainer = '<div class="container"> '
+    resultcontainer += ' <div class="navar-header"> <div class="alert alert-info">'
+    resultcontainer +=  ' <h1> '+ str( result[0] )+'</h1> '
 
     return header + bodybegin + bodyend

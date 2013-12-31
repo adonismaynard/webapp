@@ -66,7 +66,7 @@ def index(req):
         <p>
         <table><tr>
         <td><a href="addcd.py" type="button" class="btn btn-lg btn-default">Add CDs</a></td>
-        <td><a href="transaction.py" type="button" class="btn btn-lg btn-primary">CD Transactions</a></td>
+        <td><a href="transaction.py" type="button" class="btn btn-lg btn-primary">For Rent</a></td>
         <td><a href="rentedlist.py"  type="button" class="btn btn-lg btn-success">Rented List</a></td>
         <td><a href="returned.py" type="button" class="btn btn-lg btn-info">Returned List</a></td>
         <td><a href="customerform.py" type="button" class="btn btn-lg btn-warning">Customer List</a></td>
@@ -93,7 +93,7 @@ def index(req):
         <!-- Default panel contents -->
         <div class="panel-heading">
         <a href="addform.py" class="panel-title"
-        role="button">ADD New Customer</a href>
+        role="button">Click Here To Add New Renter</a href>
         </div>
         <div class="panel-body">
         """
